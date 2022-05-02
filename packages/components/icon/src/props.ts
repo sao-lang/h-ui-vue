@@ -33,6 +33,10 @@ const props = {
         type: String,
         default: '',
     },
+    loading: {
+        type: Boolean,
+        default: false,
+    }
 };
 
 export default props;
