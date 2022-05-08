@@ -15,18 +15,27 @@
         @click="handleClick"
         :style="{ color: textColor, backgroundColor, borderColor, boxShadow: plain ? 'none' : '' }"
     >
-        <slot name="icon" />
-        <slot name="loading" />
-        <slot />
+        <h-icon
+            v-if="loading"
+            loading
+            :size="20"
+            :fill="disabled ? '#aaa' : type && type !== 'default' ? '#fff' : '#000'"
+        />
+        <span v-else class="h-button__inner">
+            <slot name="icon" />
+        </span>
+        <span class="h-button__inner"> <slot /></span>
     </button>
 </template>
 <script lang="ts">
     import props from './props';
     import { defineComponent, toRefs } from 'vue';
+    import { HIcon } from '../../icon';
     export default defineComponent({
         name: 'HButton',
         props,
         emits: ['click'],
+        components: { HIcon },
         setup: (props, ctx) => {
             const { emit } = ctx;
             const { loading, disabled } = toRefs(props);

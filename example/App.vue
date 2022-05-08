@@ -13,7 +13,7 @@
     </div>
     <div>
         <h3>Button</h3>
-        <h3>mine</h3>
+        <p><h-button loading disabled type="primary"></h-button></p>
         <p>
             <span>不同类型</span><br />
             <h-button v-for="{ type, text } of types" :type="type">{{ text }}</h-button>
@@ -91,12 +91,12 @@
 </script>
 <script setup lang="ts">
     const types = [
-        { type: 'default', text: '默认按钮' },
-        { type: 'primary', text: '主要按钮' },
-        { type: 'info', text: '信息按钮' },
-        { type: 'success', text: '成功按钮' },
-        { type: 'warning', text: '预警按钮' },
-        { type: 'danger', text: '危险按钮' },
+        { type: 'default', text: 'default' },
+        { type: 'primary', text: 'primary' },
+        { type: 'info', text: 'info' },
+        { type: 'success', text: 'success' },
+        { type: 'warning', text: 'warning' },
+        { type: 'danger', text: 'danger' },
     ];
     const sizes = [
         { size: 'mini', text: '迷你尺寸' },
