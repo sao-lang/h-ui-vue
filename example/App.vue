@@ -16,7 +16,9 @@
         <p><h-button loading disabled type="primary"></h-button></p>
         <p>
             <span>不同类型</span><br />
-            <h-button v-for="{ type, text } of types" :type="type">{{ text }}</h-button>
+            <h-button v-for="{ type, text } of types" @click="handleClick" :type="type">
+                {{ text }}
+            </h-button>
         </p>
         <p>
             <span>不同类型(禁用)</span><br />
@@ -28,7 +30,7 @@
         </p>
         <p>
             <span>圆形和圆角</span><br />
-            <h-button round circle size="mini" type="warning">213445</h-button>
+            <h-button round circle size="large" type="warning">213445</h-button>
         </p>
         <p>
             <span>虚实线边框</span><br />
@@ -67,24 +69,38 @@
         </p>
     </div>
     <div>
-        <h1>Button Group</h1>
+        <h3>Button Group</h3>
         <div style="margin: 30px">
-            <h-button-group size="small" type="primary" circle bordered direction="vertical">
-                <h-button>1234</h-button>
-                <h-button type="warning" round>34132</h-button>
-                <h-button type="primary" text round>343543</h-button>
+            <h-button-group disabled size="small" direction="vertical">
+                <h-button @click="handleClick" disabled>1234</h-button>
+                <h-button>34132</h-button>
+                <h-button>343543</h-button>
             </h-button-group>
-            <h-button-group size="small" type="primary" circle bordered direction="horizental">
-                <h-button>1234</h-button>
-                <h-button type="warning" round>34132</h-button>
-                <h-button type="primary" text round>343543</h-button>
+            <p style="height: 5px"></p>
+            <h-button-group size="small" direction="horizental" circle>
+                <h-button @click="handleClick" solid>1234</h-button>
+                <h-button type="warning" round disabled dashed>34132</h-button>
+                <h-button type="primary" text size="large" round solid>343543</h-button>
             </h-button-group>
+        </div>
+    </div>
+    <div>
+        <h3>Input</h3>
+        <div style="width: 300px">
+            <h3>不同的大小</h3>
+            <h-input size="small" />
+            <p style="margin-bottom: 20px"></p>
+            <h-input size="medium" v-model="value" />
+            <p style="margin-bottom: 20px"></p>
+            <h-input size="large" v-model="value" />
+            <p style="margin-bottom: 20px"></p>
+            {{value}}
         </div>
     </div>
 </template>
 
 <script lang="ts">
-    import { defineComponent } from 'vue';
+    import { defineComponent, ref } from 'vue';
     export default defineComponent({
         name: 'App',
     });
@@ -107,4 +123,5 @@
     const handleClick = (e: Event) => {
         console.log({ e });
     };
+    const value = ref('');
 </script>

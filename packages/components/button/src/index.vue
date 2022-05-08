@@ -29,7 +29,7 @@
 </template>
 <script lang="ts">
     import props from './props';
-    import { defineComponent, toRefs } from 'vue';
+    import { defineComponent, inject, toRefs } from 'vue';
     import { HIcon } from '../../icon';
     export default defineComponent({
         name: 'HButton',
@@ -39,8 +39,9 @@
         setup: (props, ctx) => {
             const { emit } = ctx;
             const { loading, disabled } = toRefs(props);
+            const selfDisabled = inject('disabledChildren', false);
             const handleClick = (e: Event) => {
-                !disabled && !loading && emit('click', e);
+                !disabled.value && !loading.value && !selfDisabled && emit('click', e);
             };
             return { handleClick };
         },

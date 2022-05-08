@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from "vue";
+import type { ExtractPropTypes, PropType } from 'vue';
 
 const props = {
     direction: {
@@ -12,14 +12,6 @@ const props = {
     circle: {
         type: Boolean,
         default: false,
-    },
-    bordered: {
-        type: Boolean,
-        default: false,
-    },
-    type: {
-        type: String as PropType<'primary' | 'default' | 'info' | 'success' | 'warning' | 'danger'>,
-        default: 'default',
     },
 };
 

@@ -10,10 +10,10 @@ $--button-disabled-color: $--disabled-color;
 $--button-disabled-text-color: $--disabled-text-color;
 
 // 按钮高度
-$--button-mini-height: 20px;
+$--button-mini-height: 22px;
 $--button-small-height: 28px;
-$--button-medium-height: 36px;
-$--button-large-height: 44px;
+$--button-medium-height: 34px;
+$--button-large-height: 40px;
 
 $--button-border-radius: $--border-radius;
 
@@ -24,10 +24,10 @@ $--button-medium-circle-border-radius: 20px;
 $--button-large-circle-border-radius: 25px;
 
 // 按钮padding
-$--button-mini-padding: 0 9px;
-$--button-small-padding: 0 11px;
-$--button-medium-padding: 0 15px;
-$--button-large-padding: 0 22px;
+$--button-mini-padding: 0 6px;
+$--button-small-padding: 0 10px;
+$--button-medium-padding: 0 14px;
+$--button-large-padding: 0 18px;
 $--button-round-padding: 10px;
 
 // 字体大小
@@ -94,6 +94,7 @@ $--shadow-key-ambient-opacity: rgba(0, 0, 0, .12);
                     display: flex;
                     justify-content: center;
                     align-items: center;
+                    height: 100%;
                 }
 
                 &.is-#{$s} {

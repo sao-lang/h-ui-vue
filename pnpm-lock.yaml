@@ -7,6 +7,7 @@ importers:
       '@commitlint/cli': ^16.2.4
       '@commitlint/config-conventional': ^16.2.4
       '@h-ui-vue/components': workspace:^1.0.0
+      '@h-ui-vue/directives': workspace:^1.0.0
       '@h-ui-vue/styles': workspace:^1.0.0
       '@h-ui-vue/utils': workspace:^1.0.0
       '@icon-park/vue-next': ^1.3.6
@@ -18,6 +19,7 @@ importers:
       vue: ^3.2.20
     dependencies:
       '@h-ui-vue/components': link:packages/components
+      '@h-ui-vue/directives': link:packages/directives
       '@h-ui-vue/styles': link:packages/styles
       '@h-ui-vue/utils': link:packages/utils
       '@icon-park/vue-next': registry.npmmirror.com/@icon-park/vue-next/1.3.6_vue@3.2.33

@@ -1,5 +1,5 @@
 {
-    "name": "@h-ui/vue",
+    "name": "h-ui-vue",
     "version": "1.0.0",
     "description": "ui vue3 components",
     "main": "index.js",
@@ -38,6 +38,7 @@
     },
     "dependencies": {
         "@h-ui-vue/components": "workspace:^1.0.0",
+        "@h-ui-vue/directives": "workspace:^1.0.0",
         "@h-ui-vue/styles": "workspace:^1.0.0",
         "@h-ui-vue/utils": "workspace:^1.0.0",
         "@icon-park/vue-next": "^1.3.6"

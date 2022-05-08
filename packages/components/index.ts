@@ -5,7 +5,8 @@ import ButtonGroup from './button-group/src/index.vue';
 import HIcon from './icon';
 import HButton from './button';
 import HButtonGroup from './button-group';
-const coms: Component[] = [Icon, Button, ButtonGroup];
+import HInput from './input';
+const coms: Component[] = [Icon, Button, ButtonGroup, HInput];
 
 const HUI: Plugin = {
     install: app => {
@@ -14,5 +15,5 @@ const HUI: Plugin = {
         });
     },
 };
-export { HIcon, HButton, HButtonGroup };
+export { HIcon, HButton, HButtonGroup, HInput };
 export default HUI;

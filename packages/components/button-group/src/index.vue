@@ -1,23 +1,16 @@
 <template>
-    <div
-        :class="[
-            'h-button-group',
-            `h-button-group--${type}`,
-            `is-${size}`,
-            { 'is-circle': circle },
-            { 'is-bordered': bordered },
-            `is-${direction}`,
-        ]"
-    >
+    <div :class="['h-button-group', `is-${size}`, { 'is-circle': circle }, `is-${direction}`]">
         <slot />
     </div>
 </template>
 <script lang="ts">
     import props from './props';
-    import { defineComponent } from 'vue';
+    import HButton from '../../button';
+    import { defineComponent, provide } from 'vue';
     export default defineComponent({
         name: 'HButtonGroup',
         props,
+        components: { HButton },
         setup: (props, ctx) => {
             return {};
         },

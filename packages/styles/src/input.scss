@@ -1,0 +1,64 @@
+$--input-border-radius: $--border-radius;
+$--input-disabled-color: $--disabled-color;
+$--input-disabled-text-color: $--disabled-text-color;
+
+$--input-small-padding: 0 10px;
+$--input-medium-padding: 0 12px;
+$--input-large-padding: 0 14px;
+
+$--input-mini-height: 22px;
+$--input-small-height: 28px;
+$--input-medium-height: 34px;
+$--input-large-height: 40px;
+
+$--input-small-font-size: $--small-font-size;
+$--input-medium-font-size: $--medium-font-size;
+$--input-large-font-size: $--large-font-size;
+
+$--input-focus-primary-color: $--primary-color;
+
+$sizes: small medium large;
+$paddings: (small: $--input-small-padding, medium: $--input-medium-padding, large: $--input-large-padding);
+$heights: (small: $--input-small-height, medium: $--input-medium-height, large: $--input-large-height);
+$font-sizes: (small: $--input-small-font-size, medium: $--input-medium-font-size, large: $--input-large-font-size);
+
+.h-input {
+    display: flex;
+    width: 100%;
+    border: 1px solid $--input-disabled-text-color;
+    border-radius: $--input-border-radius;
+    background-color: transparent;
+
+    input {
+        border: none;
+        outline: none;
+    }
+
+    @each $s in $sizes {
+        $padding: map-get($paddings, $s);
+        $height: map-get($heights, $s);
+        $font-size: map-get($font-sizes, $s);
+
+        &--#{$s} {
+            display: flex;
+            width: 100%;
+            padding: $padding;
+            font-size: $font-size;
+            height: $height;
+            cursor: text;
+
+            .h-input__input {
+                flex: 1;
+                height: 100%;
+                overflow: hidden;
+
+                &-el {
+                    width: 100%;
+                    height: 100%;
+                    font-size: $font-size;
+                }
+            }
+        }
+    }
+
+}

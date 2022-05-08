@@ -1,10 +1,11 @@
 $--button-group-disabled-text-color: $--disabled-text-color;
+$--button-group-disabled-color: $--disabled-color;
 
 // 按钮高度
-$--button-group-mini-height: 20px;
+$--button-group-mini-height: 22px;
 $--button-group-small-height: 28px;
-$--button-group-medium-height: 36px;
-$--button-group-large-height: 44px;
+$--button-group-medium-height: 34px;
+$--button-group-large-height: 40px;
 // 按钮padding
 $--button-group-mini-padding: 0 9px;
 $--button-group-small-padding: 0 11px;
@@ -17,7 +18,7 @@ $--button-group-small-font-size: $--small-font-size;
 $--button-group-medium-font-size: $--medium-font-size;
 $--button-group-large-font-size: $--large-font-size;
 // circle的边框圆角
-$--button-group-mini-circle-border-radius: 12px;
+$--button-group-mini-circle-border-radius: 10px;
 $--button-group-small-circle-border-radius: 15px;
 $--button-group-medium-circle-border-radius: 20px;
 $--button-group-large-circle-border-radius: 25px;
@@ -28,28 +29,52 @@ $paddings: (mini: $--button-group-mini-padding, small: $--button-group-small-pad
 $font-sizes: (mini: $--button-group-mini-font-size, small: $--button-group-small-font-size, medium: $--button-group-medium-font-size, large: $--button-group-large-font-size);
 $border-radiuses: (mini: $--button-group-mini-circle-border-radius, small: $--button-group-small-circle-border-radius, medium: $--button-group-medium-circle-border-radius, large: $--button-group-large-circle-border-radius);
 
-@mixin direction($t, $flex-direction, $border-direction) {
+@mixin disabled {
+    color: $--button-group-disabled-text-color !important;
+    background-color: $--button-group-disabled-color !important;
+    box-shadow: none;
+    cursor: not-allowed;
+}
 
-    $color: map-get($colors, $t);
-    flex-direction: $flex-direction;
-
-    >.h-button {
-        @if $t==default {
-            color: #000 !important;
+@mixin first-and-last($direction, $border-width, ) {
+    &:first-of-type {
+        @if $direction==left {
+            border-top-left-radius: $border-width !important;
+            border-bottom-left-radius: $border-width !important;
         }
 
-        @else {
-            color: #fff !important;
+        @if $direction==top {
+            border-top-left-radius: $border-width !important;
+            border-top-right-radius: $border-width !important;
+        }
+    }
+
+    &:last-of-type {
+        @if $direction==left {
+            border-top-right-radius: $border-width !important;
+            border-bottom-right-radius: $border-width !important;
         }
 
-        border: none !important;
-        border-#{$border-direction}: 1px solid #fff !important;
-        background-color: $color;
+        @if $direction==top {
+            border-bottom-left-radius: $border-width !important;
+            border-bottom-right-radius: $border-width !important;
+        }
     }
+}
 
-    >.h-button:last-of-type {
-        border-#{$border-direction}: none !important;
+@mixin solid-and-dashed($type, $position, $color) {
+    &.is-#{$type} {
+        border: 1px $color $type !important;
+        border-#{$position}: none !important;
+
+        &.is-disabled {
+            background-color: #fff !important;
+        }
     }
+}
+
+@mixin direction($direction, $position) {
+    flex-direction: $direction;
 
     @each $s in $sizes {
         $height: map-get($heights, $s);
@@ -62,37 +87,27 @@ $border-radiuses: (mini: $--button-group-mini-circle-border-radius, small: $--bu
                 height: $height;
                 padding: $padding;
                 font-size: $font-size;
+                @include first-and-last($position, 4px);
+
+                &.is-disabled {
+                    @include disabled;
+                }
             }
 
             &.is-circle {
-                border-radius: $border-radius;
+                >.h-button {
+                    @include first-and-last($position, $border-radius);
+                }
             }
 
-            &.is-bordered {
-                @if $t==default {
-                    border: 1px solid $--button-group-disabled-text-color;
-                }
+            @each $t in $types {
+                $color: map-get($colors, $t);
 
-                @else {
-                    border: 1px solid $color;
-                }
+                >.h-button--#{$t} {
+                    @include solid-and-dashed(solid, $position, $color);
+                    @include solid-and-dashed(dashed, $position, $color);
 
-                >.h-button {
-                    @if $t==default {
-                        border-color: $--button-group-disabled-text-color !important;
-                        color: #000;
-                    }
-
-                    @else {
-                        border-#{$border-direction}: 1px solid $color !important;
-                        color: $color !important;
-                    }
-
-                    background-color: #fff;
-                }
-
-                >.h-button:last-of-type {
-                    border-#{$border-direction}: 0 !important;
+                    border-#{$position}: none !important;
                 }
             }
         }
@@ -103,25 +118,17 @@ $border-radiuses: (mini: $--button-group-mini-circle-border-radius, small: $--bu
     display: flex;
     width: fit-content;
     border-radius: 4px;
-    overflow: hidden;
 
     >.h-button {
         border-radius: 0 !important;
         box-shadow: none;
     }
 
-    @each $t in $types {
+    &.is-horizental {
+        @include direction(row, left);
+    }
 
-        &--#{$t} {
-
-            &.is-horizental {
-                @include direction($t, row, right)
-            }
-
-            &.is-vertical {
-                @include direction($t, column, bottom)
-            }
-
-        }
+    &.is-vertical {
+        @include direction(column, top);
     }
 }
