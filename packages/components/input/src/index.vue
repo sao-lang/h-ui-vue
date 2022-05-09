@@ -1,5 +1,8 @@
 <template>
-    <div class="h-input" v-someEvents="inputWrapperEvents" :style="{ borderColor }">
+    <div
+        class="h-input"
+        :style="{ borderColor }"
+    >
         <div v-if="type !== 'textarea'" :class="[`h-input--${size}`]">
             <div :class="['h-input__preffix']">
                 <slot name="preffix" />
@@ -8,7 +11,6 @@
                 <input
                     class="h-input__input-el"
                     ref="inputRef"
-                    v-someEvents="inputEvents"
                     @input="handleInput"
                     :value="modelValue"
                     @blur="handleBlur"
@@ -41,15 +43,6 @@
             const focused = ref<boolean>(false);
             const hovering = ref<boolean>(false);
             const borderColor = ref<string>(Border_Normal_Color);
-            const inputWrapperEvents = [
-                { name: 'click', fn: () => inputRef?.value?.focus() },
-                { name: 'mouseenter', fn: () => (hovering.value = true) },
-                { name: 'mouseleave', fn: () => (hovering.value = false) },
-            ];
-            const inputEvents = [
-                { name: 'focus', fn: () => (focused.value = true) },
-                { name: 'blur', fn: () => (focused.value = false) },
-            ];
             watch([hovering, focused], ([newHovering, newFocused]) => {
                 borderColor.value =
                     newFocused || newHovering ? Border_Active_Color : Border_Normal_Color;
@@ -60,17 +53,19 @@
                 emit('update:modelValue', value);
             };
             const handleBlur = (e: Event) => {
-                // (inputRef.value as HTMLInputElement).value = e.target.value;
-                // nextTick(() => {});
-                // console.log({ name: 'blur', value: e.target.value });
+                focused.value = false;
             };
+            const handleFocus = () => {
+                focused.value = true;
+            }
             return {
                 inputRef,
-                inputWrapperEvents,
-                inputEvents,
                 borderColor,
                 handleInput,
                 handleBlur,
+                hovering,
+                focused,
+                handleFocus,
             };
         },
     });
